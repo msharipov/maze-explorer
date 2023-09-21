@@ -1,23 +1,46 @@
 #include "items.h"
 #include <string>
+#include <cassert>
 
+#define SPEAR_DAMAGE_MULTIPLIER 1.6
+#define SWORD_DAMAGE_MULTIPLIER 2.5
+
+#define SHIELD_ARMOR_MULTIPLIER 0.5
+#define CUIRASS_ARMOR_MULTIPLIER 1.0
+#define HELMET_ARMOR_MULTIPLIER 0.5
+
+// ============================================================================
 // Item -> EmptyItem
-
 EmptyItem::EmptyItem() : quality(-1) {}
 
+bool EmptyItem::isEmpty() const {
+    return true;
+}
+
 std::string EmptyItem::describe() const {
-    return "EMPTY_ITEM";
+    return "ITEM_NAME_EMPTY";
 }
 
 short EmptyItem::getQuality() const {
-    return -1;
+    assert(false && "ERROR: Attempting to get quality of an empty item!");
 }
 
+// ============================================================================
+// Item -> Weapon
+
+bool Weapon::isEmpty() const {
+    return false;
+}
+
+// ============================================================================
 // Item -> Weapon -> Spear
 
-Spear::Spear() : quality(rand() % 6) {}
+Spear::Spear() : quality(rand() % MAX_ITEM_QUALITY) {}
 
-Spear::Spear(short q) : quality(q % 6) {}
+Spear::Spear(short q) : quality(q) {
+    assert(q >= 0 && q < MAX_ITEM_QUALITY
+           && "ERROR: Cannot create Spear: Invalid quality!");
+}
 
 Spear & Spear::operator=(const Spear &other) {
     if (this != &other) {
@@ -27,7 +50,7 @@ Spear & Spear::operator=(const Spear &other) {
 }
 
 double Spear::strike() const {
-    return 1.6 * quality;
+    return SPEAR_DAMAGE_MULTIPLIER*(0.5*quality + 1);
 }
 
 short Spear::getQuality() const {
@@ -35,35 +58,24 @@ short Spear::getQuality() const {
 }
 
 std::string Spear::describe() const {
-    std::string modifier;
-    switch (quality) {
-    case 0:
-        modifier = "Worthless Spear";
-        break;
-    case 1:
-        modifier = "Flimsy Spear";
-        break;
-    case 2:
-        modifier = "Fair Spear";
-        break;
-    case 3:
-        modifier = "Robust Spear";
-        break;
-    case 4:
-        modifier = "Pointy Spear";
-        break;
-    case 5:
-        modifier = "Legendary Spear";
-        break;
-    }
-    return modifier;
+    assert(quality >= 0
+           && quality < MAX_ITEM_QUALITY
+           && "ERROR: Cannot describe Spear: Invalid quality!");
+
+    std::string base("ITEM_NAME_SPEAR_");
+    base += (char)('0' + quality);
+    return base;
 }
 
+// ============================================================================
 // Item -> Weapon -> Sword
 
-Sword::Sword() : quality(rand() % 6) {}
+Sword::Sword() : quality(rand() % MAX_ITEM_QUALITY) {}
 
-Sword::Sword(short q) : quality(q % 6) {}
+Sword::Sword(short q) : quality(q % MAX_ITEM_QUALITY) {
+    assert(q >= 0 && q < MAX_ITEM_QUALITY
+           && "ERROR: Cannot create Sword: Invalid quality!");
+}
 
 Sword & Sword::operator=(const Sword &other) {
     if (this != &other) {
@@ -73,7 +85,7 @@ Sword & Sword::operator=(const Sword &other) {
 }
 
 double Sword::strike() const {
-    return 2.5 * quality;
+    return SWORD_DAMAGE_MULTIPLIER*(0.5*quality + 1);
 }
 
 short Sword::getQuality() const {
@@ -81,35 +93,31 @@ short Sword::getQuality() const {
 }
 
 std::string Sword::describe() const {
-    std::string modifier;
-    switch (quality) {
-    case 0:
-        modifier = "Shattered Sword";
-        break;
-    case 1:
-        modifier = "Chipped Sword";
-        break;
-    case 2:
-        modifier = "Dull Sword";
-        break;
-    case 3:
-        modifier = "Sharp Sword";
-        break;
-    case 4:
-        modifier = "Razor-Sharp Sword";
-        break;
-    case 5:
-        modifier = "Legendary Sword";
-        break;
-    }
-    return modifier;
+    assert(quality >= 0
+           && quality < MAX_ITEM_QUALITY
+           && "ERROR: Cannot describe Sword: Invalid quality!");
+
+    std::string base("ITEM_NAME_SWORD_");
+    base += (char)('0' + quality);
+    return base;
 }
 
+// ============================================================================
+// Item -> Armor
+
+bool Weapon::isEmpty() const {
+    return false;
+}
+
+// ============================================================================
 // Item -> Armor -> Shield
 
-Shield::Shield() : quality(rand() % 6) {}
+Shield::Shield() : quality(rand() % MAX_ITEM_QUALITY) {}
 
-Shield::Shield(short q) : quality(q % 6) {}
+Shield::Shield(short q) : quality(q) {
+    assert(q >= 0 && q < MAX_ITEM_QUALITY
+           && "ERROR: Cannot create Shield: Invalid quality!");
+}
 
 Shield & Shield::operator=(const Shield &other) {
     if (this != &other) {
@@ -119,7 +127,7 @@ Shield & Shield::operator=(const Shield &other) {
 }
 
 double Shield::getArmor() const {
-    return quality * 2.0 + 1;
+    return SHIELD_ARMOR_MULTIPLIER*(0.5*quality + 1);
 }
 
 short Shield::getQuality() const {
@@ -127,35 +135,23 @@ short Shield::getQuality() const {
 }
 
 std::string Shield::describe() const {
-    std::string modifier;
-    switch (quality) {
-    case 0:
-        modifier = "Wooden Shield";
-        break;
-    case 1:
-        modifier = "Copper Shield";
-        break;
-    case 2:
-        modifier = "Bronze Shield";
-        break;
-    case 3:
-        modifier = "Iron Shield";
-        break;
-    case 4:
-        modifier = "Steel Shield";
-        break;
-    case 5:
-        modifier = "Adamantine Shield";
-        break;
-    }
-    return modifier;
+    assert(quality >= 0
+           && quality < MAX_ITEM_QUALITY
+           && "ERROR: Cannot describe Shield: Invalid quality!");
+
+    std::string base("ITEM_NAME_SHIELD_");
+    base += (char)('0' + quality);
+    return base;
 }
 
 // Item -> Armor -> Cuirass
 
-Cuirass::Cuirass() : quality(rand() % 6) {}
+Cuirass::Cuirass() : quality(rand() % MAX_ITEM_QUALITY) {}
 
-Cuirass::Cuirass(short q) : quality(q % 6) {}
+Cuirass::Cuirass(short q) : quality(q) {
+    assert(q >= 0 && q < MAX_ITEM_QUALITY
+           && "ERROR: Cannot create Cuirass: Invalid quality!");
+}
 
 Cuirass & Cuirass::operator=(const Cuirass &other) {
     if (this != &other) {
@@ -165,7 +161,7 @@ Cuirass & Cuirass::operator=(const Cuirass &other) {
 }
 
 double Cuirass::getArmor() const {
-    return quality * 3.0 + 1;
+    return CUIRASS_ARMOR_MULTIPLIER*(0.5*quality + 1);
 }
 
 short Cuirass::getQuality() const {
@@ -173,28 +169,13 @@ short Cuirass::getQuality() const {
 }
 
 std::string Cuirass::describe() const {
-    std::string modifier;
-    switch (quality) {
-    case 0:
-        modifier = "Tattered Cuirass";
-        break;
-    case 1:
-        modifier = "Rusty Cuirass";
-        break;
-    case 2:
-        modifier = "Dented Cuirass";
-        break;
-    case 3:
-        modifier = "Fine Cuirass";
-        break;
-    case 4:
-        modifier = "Polished Cuirass";
-        break;
-    case 5:
-        modifier = "Mithril Cuirass";
-        break;
-    }
-    return modifier;
+    assert(quality >= 0
+           && quality < MAX_ITEM_QUALITY
+           && "ERROR: Cannot describe Cuirass: Invalid quality!");
+
+    std::string base("ITEM_NAME_CUIRASS_");
+    base += (char)('0' + quality);
+    return base;
 }
 
 // Item -> Armor -> Helmet
@@ -211,7 +192,7 @@ Helmet & Helmet::operator=(const Helmet &other) {
 }
 
 double Helmet::getArmor() const {
-    return quality * 1.2 + 1;
+    return HELMET_ARMOR_MULTIPLIER*(0.5*quality + 1);
 }
 
 short Helmet::getQuality() const {
@@ -219,26 +200,11 @@ short Helmet::getQuality() const {
 }
 
 std::string Helmet::describe() const{
-    std::string modifier;
-    switch (quality) {
-    case 0:
-        modifier = "Battered Helmet";
-        break;
-    case 1:
-        modifier = "Punctured Helmet";
-        break;
-    case 2:
-        modifier = "Clunky Helmet";
-        break;
-    case 3:
-        modifier = "Elegant Helmet";
-        break;
-    case 4:
-        modifier = "Magnificent Helmet";
-        break;
-    case 5:
-        modifier = "Epic Helmet";
-        break;
-    }
-    return modifier;
+    assert(quality >= 0
+           && quality < MAX_ITEM_QUALITY
+           && "ERROR: Cannot describe Helmet: Invalid quality!");
+
+    std::string base("ITEM_NAME_HELMET_");
+    base += (char)('0' + quality);
+    return base;
 }
