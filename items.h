@@ -6,9 +6,9 @@
 
 class Item {
 public:
+    virtual ~Item() {};
     virtual std::string describe() const = 0;
     virtual short getQuality() const = 0;
-    virtual ~Item() {}
 };
 
 
@@ -17,24 +17,18 @@ private:
     short quality;
 
 public:
-    EmptyItem() : quality(-1) {}
+    EmptyItem();
+    ~EmptyItem() {};
 
-    std::string describe() const {
-        return "EMPTY_ITEM";
-    }
-
-    short getQuality() const {
-        return -1;
-    }
-
-    ~EmptyItem() {}
+    std::string describe() const;
+    short getQuality() const;
 };
 
 
 class Weapon : virtual public Item {
 public:
+    ~Weapon() {};  
     virtual double strike() const = 0;
-    ~Weapon() {}
 };
 
 
@@ -43,114 +37,37 @@ private:
     short quality;
 
 public:
-    Spear() : quality(rand() % 6) {}
+    Spear();
+    Spear(short q);
+    Spear &operator=(const Spear &other);
+    ~Spear() {};
 
-    Spear(short q) : quality(q % 6) {}
-
-    Spear &operator=(const Spear &other) {
-        if (this != &other)
-        {
-            quality = other.getQuality();
-        }
-        return *this;
-    }
-
-    double strike() const {
-        return 1.6 * quality;
-    }
-
-    short getQuality() const {
-        return quality;
-    }
-
-    std::string describe() const {
-        std::string modifier;
-        switch (quality) {
-        case 0:
-            modifier = "Worthless Spear";
-            break;
-        case 1:
-            modifier = "Flimsy Spear";
-            break;
-        case 2:
-            modifier = "Fair Spear";
-            break;
-        case 3:
-            modifier = "Robust Spear";
-            break;
-        case 4:
-            modifier = "Pointy Spear";
-            break;
-        case 5:
-            modifier = "Legendary Spear";
-            break;
-        }
-        return modifier;
-    }
-
-    ~Spear() {}
+    double strike() const;
+    short getQuality() const;
+    std::string describe() const;
 };
+
 
 class Sword : virtual public Weapon {
 private:
     short quality;
 
 public:
-    Sword() : quality(rand() % 6) {}
+    Sword();
+    Sword(short q);
+    Sword &operator=(const Sword &other);
+    ~Sword() {};
 
-    Sword(short q) : quality(q % 6) {}
-
-    Sword &operator=(const Sword &other) {
-        if (this != &other)
-        {
-            quality = other.getQuality();
-        }
-        return *this;
-    }
-
-    double strike() const {
-        return 2.5 * quality;
-    }
-
-    short getQuality() const {
-        return quality;
-    }
-
-    std::string describe() const {
-        std::string modifier;
-        switch (quality)
-        {
-        case 0:
-            modifier = "Shattered Sword";
-            break;
-        case 1:
-            modifier = "Chipped Sword";
-            break;
-        case 2:
-            modifier = "Dull Sword";
-            break;
-        case 3:
-            modifier = "Sharp Sword";
-            break;
-        case 4:
-            modifier = "Razor-Sharp Sword";
-            break;
-        case 5:
-            modifier = "Legendary Sword";
-            break;
-        }
-        return modifier;
-    }
-
-    ~Sword() {}
+    double strike() const;
+    short getQuality() const;
+    std::string describe() const;
 };
 
 
 class Armor : virtual public Item {
 public:
-    virtual double getArmor() const = 0;
-
     ~Armor() {}
+    virtual double getArmor() const = 0; 
 };
 
 
@@ -159,140 +76,45 @@ private:
     short quality;
 
 public:
-    Shield() : quality(rand() % 6) {}
+    Shield();
+    Shield(short q);
+    Shield &operator=(const Shield &other);
+    ~Shield() {};
 
-    Shield(short q) : quality(q % 6) {}
-
-    double getArmor() const {
-        return quality * 2.0 + 1;
-    }
-
-    short getQuality() const {
-        return quality;
-    }
-
-    std::string describe() const {
-        std::string modifier;
-        switch (quality)
-        {
-        case 0:
-            modifier = "Wooden Shield";
-            break;
-        case 1:
-            modifier = "Copper Shield";
-            break;
-        case 2:
-            modifier = "Bronze Shield";
-            break;
-        case 3:
-            modifier = "Iron Shield";
-            break;
-        case 4:
-            modifier = "Steel Shield";
-            break;
-        case 5:
-            modifier = "Adamantine Shield";
-            break;
-        }
-        return modifier;
-    }
-
-    ~Shield() {}
+    double getArmor() const;
+    short getQuality() const;
+    std::string describe() const;
 };
 
 
-class Cuirass: virtual public Armor
-{
+class Cuirass: virtual public Armor {
 private:
     short quality;
 
 public:
-    Cuirass() : quality(rand() % 6) {}
+    Cuirass();
+    Cuirass(short q);
+    Cuirass &operator=(const Cuirass &other);
+    ~Cuirass() {};
 
-    Cuirass(short q) : quality(q % 6) {}
-
-    double getArmor() const {
-        return quality * 3.0 + 1;
-    }
-
-    short getQuality() const {
-        return quality;
-    }
-
-    std::string describe() const {
-        std::string modifier;
-        switch (quality)
-        {
-        case 0:
-            modifier = "Tattered Cuirass";
-            break;
-        case 1:
-            modifier = "Rusty Cuirass";
-            break;
-        case 2:
-            modifier = "Dented Cuirass";
-            break;
-        case 3:
-            modifier = "Fine Cuirass";
-            break;
-        case 4:
-            modifier = "Polished Cuirass";
-            break;
-        case 5:
-            modifier = "Mithril Cuirass";
-            break;
-        }
-        return modifier;
-    }
-
-    ~Cuirass() {}
+    double getArmor() const;
+    short getQuality() const;
+    std::string describe() const;
 };
 
 
-class Helmet: virtual public Armor
-{
+class Helmet: virtual public Armor {
 private:
     short quality;
 
 public:
-    Helmet() : quality(rand() % 6) {}
+    Helmet();
+    Helmet(short q);
+    Helmet &operator=(const Helmet &other);
+    ~Helmet() {};
 
-    Helmet(short q) : quality(q % 6) {}
-
-    double getArmor() const {
-        return quality * 1.2 + 1;
-    }
-
-    short getQuality() const {
-        return quality;
-    }
-
-    std::string describe() {
-        std::string modifier;
-        switch (quality)
-        {
-        case 0:
-            modifier = "Battered Helmet";
-            break;
-        case 1:
-            modifier = "Punctured Helmet";
-            break;
-        case 2:
-            modifier = "Clunky Helmet";
-            break;
-        case 3:
-            modifier = "Elegant Helmet";
-            break;
-        case 4:
-            modifier = "Magnificent Helmet";
-            break;
-        case 5:
-            modifier = "Epic Helmet";
-            break;
-        }
-        return modifier;
-    }
-
-    ~Helmet() {}
+    double getArmor() const;
+    short getQuality() const;
+    std::string describe() const;
 };
 #endif
