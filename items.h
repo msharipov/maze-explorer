@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string>
 
+#define MAX_ITEM_QUALITY 6
+
 class Item {
 public:
     virtual ~Item() {};
