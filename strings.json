@@ -34,6 +34,9 @@
     "ITEM_NAME_HELMET_2" : "Brass Helmet",
     "ITEM_NAME_HELMET_3" : "Iron Helmet",
     "ITEM_NAME_HELMET_4" : "Steel Helmet",
-    "ITEM_NAME_HELMET_5" : "Adamantine Helmet"
+    "ITEM_NAME_HELMET_5" : "Adamantine Helmet",
+
+    "SYMBOL_PLAYER" : "☺",
+    "SYMBOL_LIZARDMAN" : "L"
 
 }

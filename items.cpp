@@ -72,7 +72,7 @@ std::string Spear::describe() const {
 
 Sword::Sword() : quality(rand() % MAX_ITEM_QUALITY) {}
 
-Sword::Sword(short q) : quality(q % MAX_ITEM_QUALITY) {
+Sword::Sword(short q) : quality(q) {
     assert(q >= 0 && q < MAX_ITEM_QUALITY
            && "ERROR: Cannot create Sword: Invalid quality!");
 }
@@ -105,7 +105,7 @@ std::string Sword::describe() const {
 // ============================================================================
 // Item -> Armor
 
-bool Weapon::isEmpty() const {
+bool Armor::isEmpty() const {
     return false;
 }
 
@@ -144,6 +144,7 @@ std::string Shield::describe() const {
     return base;
 }
 
+// ============================================================================
 // Item -> Armor -> Cuirass
 
 Cuirass::Cuirass() : quality(rand() % MAX_ITEM_QUALITY) {}
@@ -178,11 +179,12 @@ std::string Cuirass::describe() const {
     return base;
 }
 
+// ============================================================================
 // Item -> Armor -> Helmet
 
-Helmet::Helmet() : quality(rand() % 6) {}
+Helmet::Helmet() : quality(rand() % MAX_ITEM_QUALITY) {}
 
-Helmet::Helmet(short q) : quality(q % 6) {}
+Helmet::Helmet(short q) : quality(q) {}
 
 Helmet & Helmet::operator=(const Helmet &other) {
     if (this != &other) {
