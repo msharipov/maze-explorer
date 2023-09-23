@@ -1,0 +1,42 @@
+{   
+    "ITEM_NAME_EMPTY" : "EMPTY_ITEM",
+
+    "ITEM_NAME_SPEAR_0" : "Sharpened Stick",
+    "ITEM_NAME_SPEAR_1" : "Crooked Spear",
+    "ITEM_NAME_SPEAR_2" : "Damaged Spear",
+    "ITEM_NAME_SPEAR_3" : "Sturdy Spear",
+    "ITEM_NAME_SPEAR_4" : "Pointy Spear",
+    "ITEM_NAME_SPEAR_5" : "Legendary Spear",
+
+    "ITEM_NAME_SWORD_0" : "Shattered Sword",
+    "ITEM_NAME_SWORD_1" : "Chipped Sword",
+    "ITEM_NAME_SWORD_2" : "Dull Sword",
+    "ITEM_NAME_SWORD_3" : "Sharp Sword",
+    "ITEM_NAME_SWORD_4" : "Razor-Sharp Sword",
+    "ITEM_NAME_SWORD_5" : "Legendary Sword",
+
+    "ITEM_NAME_SHIELD_0" : "Cracked Buckler",
+    "ITEM_NAME_SHIELD_1" : "Crude Shield",
+    "ITEM_NAME_SHIELD_2" : "Bronze Shield",
+    "ITEM_NAME_SHIELD_3" : "Iron Shield",
+    "ITEM_NAME_SHIELD_4" : "Steel Shield",
+    "ITEM_NAME_SHIELD_5" : "Adamantine Shield",
+
+    "ITEM_NAME_CUIRASS_0" : "Hide Breastplate",
+    "ITEM_NAME_CUIRASS_1" : "Hardwood Breastplate",
+    "ITEM_NAME_CUIRASS_2" : "Bronze Chesplate",
+    "ITEM_NAME_CUIRASS_3" : "Iron Chesplate",
+    "ITEM_NAME_CUIRASS_4" : "Steel Cuirass",
+    "ITEM_NAME_CUIRASS_5" : "Adamantine Cuirass",
+
+    "ITEM_NAME_HELMET_0" : "Broken Helmet",
+    "ITEM_NAME_HELMET_1" : "Rusty Helmet",
+    "ITEM_NAME_HELMET_2" : "Brass Helmet",
+    "ITEM_NAME_HELMET_3" : "Iron Helmet",
+    "ITEM_NAME_HELMET_4" : "Steel Helmet",
+    "ITEM_NAME_HELMET_5" : "Adamantine Helmet",
+
+    "SYMBOL_PLAYER" : "☺",
+    "SYMBOL_LIZARDMAN" : "L"
+
+}
